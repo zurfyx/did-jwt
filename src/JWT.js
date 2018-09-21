@@ -77,6 +77,8 @@ export async function createJWT (payload, {issuer, signer, alg, expiresIn}) {
   if (!signer) throw new Error('No Signer functionality has been configured')
   if (!issuer) throw new Error('No issuing DID has been configured')
   const header = {...JOSE_HEADER, alg: alg || defaultAlg}
+  console.log('HEREEEEEEEEEEEEEEEE')
+  console.log(header)
   const timestamps = { iat: Math.floor(Date.now() / 1000) }
   if (expiresIn) {
     if (typeof expiresIn === 'number') {
