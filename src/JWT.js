@@ -125,7 +125,7 @@ export async function verifyJWT (jwt, options = {}) {
     if (payload.iat && payload.iat > (now + IAT_SKEW)) {
       throw new Error(`JWT not valid yet (issued in the future): iat: ${payload.iat} > now: ${now}`)
     }
-    if (payload.exp && (payload.exp <= (now - IAT_SKEW))) {
+    if (!options.ignoreExp && payload.exp && (payload.exp <= (now - IAT_SKEW))) {
       throw new Error(`JWT has expired: exp: ${payload.exp} < now: ${now}`)
     }
     if (payload.aud) {
